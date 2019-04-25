@@ -46,7 +46,7 @@ Proposals can be submitted via Github. This is done as follows:
 ## Organizers
 
 - [Lennart Beringer](https://www.cs.princeton.edu/~eberinge/) (Princeton University)
-- [Robbert Krebbers](https://robbertkrebbers.nl] (TU Delft)
+- [Robbert Krebbers](https://robbertkrebbers.nl) (TU Delft)
 - [Thomas Noll](https://moves.rwth-aachen.de/people/noll/) (RWTH Aachen University)
 - [Makoto Tatsuta](http://research.nii.ac.jp/~tatsuta/index-e.html) (National Institute of Informatics)
   
