@@ -28,7 +28,7 @@ More concretely, the properties listed above are handled as follows:
 
 ## More Information
 
-* Contact person: [Thomas Noll](https://moves.rwth-aachen.de/people/noll/)
 * [ATTESTOR Tool](https://github.com/moves-rwth/attestor)
 * [ATTESTOR Benchmark Collection](https://github.com/moves-rwth/attestor-examples)
 * [Verification of DSW using TVLA](https://doi.org/10.1007/11823230_17)
+* Contact person: [Thomas Noll](https://moves.rwth-aachen.de/people/noll/)
