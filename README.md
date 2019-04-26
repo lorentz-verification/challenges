@@ -37,7 +37,7 @@ fully worked out verification task.
 
 Proposals can be submitted via Github. This is done as follows:
 
-- Fork the repository
+- Clone the repository
 - Create a new directory called `challenge_name`
 - Put a Markdown file called `README.md` in that directory that describes
   the challenge, together with any number of additional files.
