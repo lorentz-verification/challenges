@@ -43,6 +43,15 @@ Proposals can be submitted via Github. This is done as follows:
   the challenge, together with any number of additional files.
 - Make a pull request.
 
+## Related collections
+
+The following competitions are targeted at related verification challenges, though not necessarily dealing only with pointer software:
+- [Competition on Software Verification (SV-COMP)](https://sv-comp.sosy-lab.org/) and its [Collection of Verification Tasks](https://github.com/sosy-lab/sv-benchmarks)
+- [VerifyThis](http://www.pm.inf.ethz.ch/research/verifythis.html)
+- [Verified Software Competition](http://vscomp.org/)
+
+Another related activity is the [Dagstuhl Seminar 14171 on "Evaluating Software Verification Systems: Benchmarks and Competitions"](https://www.dagstuhl.de/en/program/calendar/semhp/?semnr=14171).
+
 ## Organizers
 
 - [Lennart Beringer](https://www.cs.princeton.edu/~eberinge/) (Princeton University)
