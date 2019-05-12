@@ -16,18 +16,18 @@ following program that illustrates a simplified instance of the problem:
 
 ```
 let x = ref(false) in
-x := true  ||  while (x != true);
+x := true  ||  while (!x != true);
 ```
 
 This program creates a reference that is initially `false`. One thread will set
 it to `true` and the other will perform a busy loop until the reference has
-become `true`.
+become `true` (`!` is derefencing in this code).
 
 This program does not terminate in general. If an unfair scheduler is used that
 never executes the first thread (that sets the reference to `true`) and only
 executes the second thread (that performs the busy loop), the program will
 never terminate. The notion of termination that should be used for concurrent
-programs is termination under the assumption of fair schedule, i.e. that any
+programs is termination under the assumption of fair scheduling, i.e. that any
 thread eventually makes a step.
 
 This challenge is to investigate the state of the art of verification tools
@@ -39,7 +39,7 @@ Prove that the following program terminate under fair scheduling.
 
 ```
 let x = ref(false) in
-x := true  ||  while (x != true);
+x := true  ||  while (!x != true);
 ```
 
 Or, alternatively, used `fork` instead of parallel composition (`||`).
@@ -47,7 +47,7 @@ Or, alternatively, used `fork` instead of parallel composition (`||`).
 ```
 let x = ref(false) in
 fork { x := true };
-while (x != true);
+while (!x != true);
 ```
 
 ## Second challenge
