@@ -1,0 +1,231 @@
+Here is a leetcode problem.
+
+    https://leetcode.com/problems/queue-reconstruction-by-height/
+
+    Suppose you have a random list of people standing in a queue. Each person is 
+    described by a pair of integers (h, k), where h is the height of the person 
+    and k is the number of people in front of this person who have a height
+    greater than or equal to h. Write an algorithm to reconstruct the queue.
+
+    Note:
+    The number of people is less than 1,100.
+
+
+    Example
+
+    Input:
+    [[7,0], [4,4], [7,1], [5,0], [6,1], [5,2]]
+
+    Output:
+    [[5,0], [7,0], [5,2], [6,1], [4,4], [7,1]]
+
+In the end attached two solutions to it. Both of them has complexity O(nlogn).
+One uses a binary-tree-like data structure and the other uses a divide-and-conquer
+stratefy. Typically, it takes 20-25 minutes to complete one of these two
+programs and it may take about 5 minutes to explain the algorithm and show
+why it works --- if you talk to a human.
+
+But it will take much longer and far more effort to verify it in tools (if I
+am correct). How much human effort is needed to verify this in different
+tools? What are possible improvements in the future?
+
+==============================
+
+// Solution #1
+
+#define N 1501
+#define lowbit(x) (x&-x)
+#include <vector>
+#include <cstdlib>
+#include <algorithm>
+#include <iostream>
+
+using namespace std;
+
+vector < vector<int> > p;
+int n;
+int t[N] = {};
+
+int h(int i) {
+  return p[i][0];
+}
+
+int k(int i) {
+  return p[i][1];
+}
+
+bool cmp(int i, int j) {
+  if (h(i) != h(j))
+    return h(i) < h(j);
+  else
+    return k(i) > k(j);
+}
+
+void add (int i) {
+  while (i <= n) {
+    t[i] ++;
+    i += lowbit(i);
+  }
+}
+
+void sub (int i) {
+  while (i <= n) {
+    t[i] --;
+    i += lowbit(i);
+  }
+}
+
+// return 1..n
+int get_pos(int total, int cnt) {
+  int s_hi = total;
+  // here, we must have s_hi > cnt
+  int x = n;
+  int lo, hi, s_lo;
+  while (1)
+    if (s_hi - t[x] <= cnt)
+    {
+      lo = x - lowbit(x);
+      hi = x;
+      s_lo = s_hi - t[x];
+      break;
+    }
+    else
+    {
+      s_hi -= t[x];
+      x -= lowbit(x);
+    }
+  while (lo + 1 < hi) {
+    int mid = (lo + hi) >> 1;
+    if (s_lo + t[mid] <= cnt)
+    {
+      lo = mid;
+      s_lo += t[mid];
+    }
+    else
+    {
+      hi = mid;
+      s_hi = s_lo + t[mid];
+    }
+  }
+  return hi;
+}
+
+class Solution {
+public:
+    vector < vector<int> > reconstructQueue( vector < vector<int> > & people) {
+        p = people;
+        n = p.size();
+        int q[N];
+        for (int i = 0; i < n; ++ i)
+          q[i] = i;
+        sort (q, q + n, cmp);
+        for (int i = 1; i <= n; ++ i)
+          add(i);
+        vector < vector <int> > ret = p;
+        for (int i = 0; i < n; ++ i) {
+          int j = q[i];
+          int alive = k(j);
+          int pos = get_pos(n - i, alive);
+          sub(pos);
+          ret[pos-1] = p[j];
+        }
+        return ret;
+    }
+};
+
+==============================
+
+// Solution 2
+
+#include <vector>
+#include <cstdlib>
+#include <algorithm>
+#include <iostream>
+
+using namespace std;
+
+int n;
+
+bool cmp(vector<int> & pi, vector<int> & pj) {
+  if (pi[0] != pj[0])
+    return pi[0] < pj[0];
+  else
+    return pi[1] < pj[1];
+}
+
+void solve (vector< vector<int> >::iterator a1,
+            vector< vector<int> >::iterator a2,
+            vector< vector<int> >::iterator b1,
+            vector< vector<int> >::iterator b2) {
+  int m = a2 - a1;
+  if (m == 1)
+    return;
+  vector< vector<int> >::iterator l = b1;
+  vector< vector<int> >::iterator r = b1 + (m >> 1);
+  solve (l, r, a1, a1 + (m >> 1));
+  solve (r, b2, a1 + (m >> 1), a2);
+  int i = 0, j = 0, k = 0;
+  while (1)
+    if (i == (m >> 1))
+      if (j == m - (m >> 1))
+        break;
+      else
+      {
+        a1[k] = r[j];
+        ++ k;
+        ++ j;
+      }
+    else
+      if (j == m - (m >> 1))
+      {
+        l[i][2] -= j;
+        a1[k] = l[i];
+        ++ k;
+        ++ i;
+      }
+      else
+      {
+        if (l[i][2] - j <= r[j][2])
+        {
+          l[i][2] -= j;
+          a1[k] = l[i];
+          ++ k;
+          ++ i;
+        }
+        else
+        {
+          a1[k] = r[j];
+          ++ k;
+          ++ j;
+        }
+      }
+  return;
+}
+
+class Solution {
+public:
+    vector < vector<int> > reconstructQueue( vector < vector<int> > & people) {
+        n = people.size();
+        if (n == 0)
+          return people;
+        for (int i = 0; i < n; ++ i)
+          people[i].push_back(people[i][1]);
+        sort(people.begin(), people.end(), cmp);
+        for (int i = 0, pre = people[0][0] - 1, cnt = 0; i < n; ++ i)
+          if (people[i][0] == pre)
+          {
+            people[i][2] -= cnt;
+            cnt ++;
+          }
+          else
+          {
+            pre = people[i][0];
+            cnt = 1;
+          }
+        vector < vector <int> > people2 = people;
+        solve(people.begin(), people.end(), people2.begin(), people2.end());
+        for (int i = 0; i < n; ++ i)
+          people[i].pop_back();
+        return people;
+    }
+};
