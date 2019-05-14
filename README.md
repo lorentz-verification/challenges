@@ -46,6 +46,7 @@ Proposals can be submitted via Github. This is done as follows:
 ## Related collections
 
 The following competitions are targeted at related verification challenges, though not necessarily dealing only with pointer software:
+- [Separation Logic Competition (SL-COMP)](https://sl-comp.github.io/)
 - [Competition on Software Verification (SV-COMP)](https://sv-comp.sosy-lab.org/) and its [Collection of Verification Tasks](https://github.com/sosy-lab/sv-benchmarks)
 - [VerifyThis](http://www.pm.inf.ethz.ch/research/verifythis.html)
 - [Verified Software Competition](http://vscomp.org/)
