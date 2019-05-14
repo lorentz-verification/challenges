@@ -1,0 +1,3 @@
+Verify a C implementation of dinic algorithm, a polynomial algorithm for computing max flow on flow networks.
+
+https://en.wikipedia.org/wiki/Dinic%27s_algorithm
