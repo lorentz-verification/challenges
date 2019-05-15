@@ -32,4 +32,5 @@ More concretely, the first four properties listed above are handled as follows:
 * [ATTESTOR Tool](https://github.com/moves-rwth/attestor)
 * [ATTESTOR Benchmark Collection](https://github.com/moves-rwth/attestor-examples)
 * [Verification of DSW using TVLA](https://doi.org/10.1007/11823230_17)
+* [Challenge 2](https://docs.google.com/document/d/1TvvoRovDQtmuXth6vcWtUNCQCNmzZO9X_DdcxM9aXbQ/edit?usp=drive_web) of [VerifyThis @ ETAPS 2016](http://etaps2016.verifythis.org/)
 * Contact person: [Thomas Noll](https://moves.rwth-aachen.de/people/noll/)
